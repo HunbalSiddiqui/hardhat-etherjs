@@ -8,5 +8,11 @@ describe("Greeter", async function () {
         await greeter.deployed();
 
         expect(await greeter.greet()).to.equal("Hello, Web2");
- })
+
+        const updateGreeting = await greeter.setGreeting("Hello, Web3");
+        // wait till transaction is mined
+        await updateGreeting.wait();
+
+        expect(await greeter.greet()).to.equal("Hello, Web3");
+    })
 })
